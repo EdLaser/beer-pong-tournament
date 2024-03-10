@@ -9,13 +9,15 @@ datasource db {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model matches {
-  uuid                        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  team_1                      String @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  team_2                      String @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  winner                      String @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  teams_matches_team_1Toteams teams  @relation("matches_team_1Toteams", fields: [team_1], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_team_1_fkey")
-  teams_matches_team_2Toteams teams  @relation("matches_team_2Toteams", fields: [team_2], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_team_2_fkey")
-  teams_matches_winnerToteams teams  @relation("matches_winnerToteams", fields: [winner], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_winner_fkey")
+  uuid                        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  team_1                      String  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  team_2                      String  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  draw                        Boolean @default(false)
+  missing_cups                Int?    @db.SmallInt
+  winner                      String? @db.Uuid
+  teams_matches_team_1Toteams teams   @relation("matches_team_1Toteams", fields: [team_1], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_team_1_fkey")
+  teams_matches_team_2Toteams teams   @relation("matches_team_2Toteams", fields: [team_2], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_team_2_fkey")
+  teams_matches_winnerToteams teams?  @relation("matches_winnerToteams", fields: [winner], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_winner_fkey")
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.

@@ -9,7 +9,7 @@
         v-model="playerName"
       />
       <select v-model="belongsToTeam">
-        <option value="null">Gehört ins Team...</option>
+        <option value="null" disabled>Gehört ins Team...</option>
         <option v-for="team in teams" :value="team.uuid">
           {{ team.team_name }}
         </option>
@@ -26,12 +26,12 @@
       <div class="flex gap-5 w-full flex-wrap" v-if="players?.length > 0">
         <select v-model="playerToTeam">
           <option value="">Spieler auswählen...</option>
-          <option v-for="player in players" :value="player">
+          <option v-for="player in players" :value="player.uuid">
             {{ player.name }}
           </option>
         </select>
         <select v-model="belongsToTeam">
-          <option value="null">Gehört ins Team...</option>
+          <option value="null" disabled>Gehört ins Team...</option>
           <option v-for="team in teams" :value="team.uuid">
             {{ team.team_name }}
           </option>
@@ -75,7 +75,7 @@ const assignToTeam = async () => {
     method: "POST",
     body: {
       uuid: playerToTeam.value,
-      belongsToTeam: playerToTeam.value,
+      belongsToTeam: belongsToTeam.value,
     },
   });
   await refreshPlayers();

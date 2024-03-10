@@ -2,6 +2,7 @@
   <h1 class="text-4xl/normal text-center mb-20">Beerpong Tournament</h1>
   <TeamComponent />
   <PlayerComponent />
+  <MatchComponent />
 </template>
 <script setup lang="ts">
 type Team = {

@@ -17,11 +17,11 @@
       v-for="team in data"
     >
       <h3 class="text-lg">{{ team.team_name }}</h3>
-      <div v-if="team.members?.length > 0">
+      <div v-if="team.players?.length > 0">
         <p>Spieler im Team:</p>
-        <ul>
-          <li v-for="member in team.members">{{ member }}</li>
-        </ul>
+        <div>
+          <span v-for="player in team.players">{{ player.name }}, </span>
+        </div>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
 export type Team = {
   uuid: string;
   team_name: string;
-  members: Array<string>;
+  players: Array<{ name: string }>;
 };
 
 const createTeam = async () => {
