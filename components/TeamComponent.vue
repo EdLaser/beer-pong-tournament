@@ -23,7 +23,9 @@
       <div v-if="team.players?.length > 0">
         <p>Spieler im Team:</p>
         <div class="divide-x">
-          <span v-for="player in team.players">{{ player.name }}, </span>
+          <span v-for="(player, index) in team.players"
+            >{{ player.name }}{{ index + 1 < team.players.length ? "," : null }}
+          </span>
         </div>
       </div>
     </div>
