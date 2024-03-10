@@ -23,7 +23,7 @@
       <div v-if="team.players?.length > 0">
         <p>Spieler im Team:</p>
         <div class="space-x-2 mt-3">
-          <span v-for="(player, index) in team.players"
+          <span class="text-lg font-bold" v-for="(player, index) in team.players"
             >{{ player.name }}{{ index + 1 < team.players.length ? "," : null }}
           </span>
         </div>
