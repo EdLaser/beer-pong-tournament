@@ -7,14 +7,17 @@
       placeholder="Teamname"
       v-model="teamName"
     />
-    <button @click="createTeam()" class="bg-gray-400 p-1 rounded-md text-white">
+    <button
+      @click="async () => await store.createTeam(teamName)"
+      class="bg-gray-400 p-1 rounded-md text-white"
+    >
       Team erstellen
     </button>
   </div>
   <div class="grid grid-cols-2 gap-2 mb-16">
     <div
       class="bg-gray-400 rounded-md text-white flex-col p-2"
-      v-for="team in data"
+      v-for="team in teams"
     >
       <h3 class="text-lg">{{ team.team_name }}</h3>
       <div v-if="team.players?.length > 0">
@@ -33,20 +36,8 @@ export type Team = {
   players: Array<{ name: string }>;
 };
 
-const createTeam = async () => {
-  await useFetch("/api/create-team", {
-    method: "POST",
-    body: { teamName: teamName.value },
-  });
-  refresh();
-};
+const store = useBeerStore();
+const { teams } = storeToRefs(store);
 
 const teamName = ref("");
-
-const { data, pending, error, refresh } = await useFetch<Array<Team>>(
-  "/api/get-teams",
-  {
-    method: "GET",
-  }
-);
 </script>

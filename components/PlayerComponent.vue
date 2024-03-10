@@ -16,7 +16,7 @@
       </select>
     </div>
     <button
-      @click="createPlayer()"
+      @click="async () => store.createPlayer(belongsToTeam, playerName)"
       class="bg-gray-400 p-1 rounded-md text-white mb-6"
     >
       Player erstellen
@@ -37,7 +37,9 @@
           </option>
         </select>
         <button
-          @click="assignToTeam()"
+          @click="
+            async () => await store.assignToTeam(playerToTeam, belongsToTeam)
+          "
           class="bg-gray-400 p-1 rounded-md text-white"
         >
           In Team zuweisen
@@ -49,51 +51,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { Team } from "./TeamComponent.vue";
+const store = useBeerStore();
+const { players, teams } = storeToRefs(store);
 
 const playerName = ref("");
 const belongsToTeam = ref("null");
 const playerToTeam = ref("");
-
-const createPlayer = async () => {
-  if (belongsToTeam.value === "null") {
-    return;
-  }
-  await useFetch("/api/create-player", {
-    method: "POST",
-    body: {
-      name: playerName.value,
-      belongsToTeam: belongsToTeam.value,
-    },
-  });
-  await refreshPlayers();
-  await refreshTeams();
-};
-
-const assignToTeam = async () => {
-  await useFetch("/api/assign-player-to-team", {
-    method: "POST",
-    body: {
-      uuid: playerToTeam.value,
-      belongsToTeam: belongsToTeam.value,
-    },
-  });
-  await refreshPlayers();
-  await refreshTeams();
-};
-
-const { data: players, refresh: refreshPlayers } = await useFetch<
-  Array<{ name: string; uuid: string }>
->("/api/get-players", {
-  method: "GET",
-});
-
-const {
-  data: teams,
-  pending,
-  error,
-  refresh: refreshTeams,
-} = await useFetch<Array<Team>>("/api/get-teams", {
-  method: "GET",
-});
 </script>
