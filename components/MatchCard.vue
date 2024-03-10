@@ -1,6 +1,6 @@
 <template>
   <div class="ring-2 ring-gray-400 rounded-md flex-col p-2">
-    <h2 class="text-3xl">{{ nummer }}</h2>
+    <h2 class="text-3xl">Matchnr. {{ nummer }}</h2>
     <div class="text-xl flex justify-between mb-5">
       <span>{{ team1.team_name }}</span
       ><span>vs.</span>
@@ -48,6 +48,9 @@
           <option :value="team2.uuid">
             {{ team2.team_name }}
           </option>
+          <option :value="winner.uuid" v-if="winner !== ''">
+            {{ winner.team_name }}
+          </option>
         </select>
       </div>
       <div class="flex gap-3 flex-col">
@@ -90,7 +93,7 @@ const props = defineProps<{
 
 const teamGiven1 = ref(props.team1.uuid);
 const teamGiven2 = ref(props.team2.uuid);
-const winner = ref(props.winner ? props.winner : "null");
+const winner = ref(props.winner.uuid ? props.winner.uuid : { uuid: "" });
 const isDraw = ref(props.isDraw ? props.isDraw : false);
 const missingCups = ref(props.missingCups ? props.missingCups : 0);
 
@@ -109,7 +112,7 @@ const updateMatch = async (uuid: string) => {
       uuid,
       team1: teamGiven1.value,
       team2: teamGiven2.value,
-      winner: winner.value,
+      winner: winner.value ? winner.value.uuid : null,
       isDraw: isDraw.value,
       missingCups: missingCups.value,
     },

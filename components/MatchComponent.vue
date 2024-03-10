@@ -39,8 +39,8 @@
         :team1="match.team1"
         :team2="match.team2"
         :winner="match.winner"
-        :is-draw="match.is_draw"
-        :missing-cups="match.missing_cups"
+        :is-draw="match.draw"
+        :missing-cups="match.missingCups"
       />
     </div>
   </div>
