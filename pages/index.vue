@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-4xl/normal text-center mb-20">Beerpong Tournament</h1>
+  <h1 class="text-6xl/normal text-center mb-20">Beerpong Tournament</h1>
   <TeamComponent />
   <PlayerComponent />
   <MatchComponent />
