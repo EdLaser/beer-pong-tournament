@@ -22,7 +22,7 @@
       <h3 class="text-xl">{{ team.team_name }}</h3>
       <div v-if="team.players?.length > 0">
         <p>Spieler im Team:</p>
-        <div class="divide-x">
+        <div class="divide-x space-x-2">
           <span v-for="(player, index) in team.players"
             >{{ player.name }}{{ index + 1 < team.players.length ? "," : null }}
           </span>
