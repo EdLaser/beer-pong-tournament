@@ -21,7 +21,6 @@
       v-for="(team, index) in teams"
     >
       <h3 class="text-2xl">{{ team.team_name }}</h3>
-      {{ index }}
       <div v-if="team.players?.length > 0">
         <p>Spieler im Team:</p>
         <div class="space-x-2 mt-3">

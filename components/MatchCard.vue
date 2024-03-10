@@ -1,5 +1,6 @@
 <template>
   <div class="ring-2 ring-gray-400 rounded-md flex-col p-2">
+    <h2 class="text-3xl">{{ nummer }}</h2>
     <div class="text-xl flex justify-between mb-5">
       <span>{{ team1.team_name }}</span
       ><span>vs.</span>
@@ -78,6 +79,7 @@
 import type { Team } from "./TeamComponent.vue";
 
 const props = defineProps<{
+  nummer: number;
   uuid: string;
   team1: Team;
   team2: Team;

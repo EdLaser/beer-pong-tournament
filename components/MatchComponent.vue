@@ -32,7 +32,8 @@
     <h3 class="text-lg">Alle Matches:</h3>
     <div class="flex flex-col gap-3">
       <MatchCard
-        v-for="match in matches"
+        v-for="(match, index) in matches"
+        :nummer="index + 1"
         :key="match.uuid"
         :uuid="match.uuid"
         :team1="match.team1"
