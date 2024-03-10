@@ -48,7 +48,7 @@
           <option :value="team2.uuid">
             {{ team2.team_name }}
           </option>
-          <option :value="winner.uuid" v-if="winner !== ''">
+          <option :value="winner.uuid" v-if="winner.uuid !== ''">
             {{ winner.team_name }}
           </option>
         </select>
@@ -106,13 +106,14 @@ const {
 });
 
 const updateMatch = async (uuid: string) => {
+  console.log(winner.value);
   await useFetch("/api/update-match", {
     method: "POST",
     body: {
       uuid,
       team1: teamGiven1.value,
       team2: teamGiven2.value,
-      winner: winner.value ? winner.value.uuid : null,
+      winner: winner.value,
       isDraw: isDraw.value,
       missingCups: missingCups.value,
     },

@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-
+  console.log(body);
   const data = await usePrisma(event).matches.update({
     where: {
       uuid: body.uuid,
