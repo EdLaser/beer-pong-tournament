@@ -16,14 +16,18 @@
   </div>
   <div class="grid grid-cols-2 gap-2 mb-16">
     <div
-      class="bg-gray-400 rounded-md text-white flex-col p-2"
-      v-for="team in teams"
+      class="rounded-md text-white flex-col p-2"
+      :class="determineColor(index)"
+      v-for="(team, index) in teams"
     >
       <h3 class="text-2xl">{{ team.team_name }}</h3>
+      {{ index }}
       <div v-if="team.players?.length > 0">
         <p>Spieler im Team:</p>
         <div class="space-x-2 mt-3">
-          <span class="text-lg font-bold" v-for="(player, index) in team.players"
+          <span
+            class="text-lg font-bold"
+            v-for="(player, index) in team.players"
             >{{ player.name }}{{ index + 1 < team.players.length ? "," : null }}
           </span>
         </div>
@@ -42,4 +46,14 @@ const store = useBeerStore();
 const { teams } = storeToRefs(store);
 
 const teamName = ref("");
+
+const determineColor = (index: number) => {
+  if (index === 0 || index === 2 || index === 4) {
+    return "bg-pink-500";
+  } else if (index === 1 || index === 3 || index === 5) {
+    return "bg-emerald-600";
+  } else {
+    return "bg-violet-700";
+  }
+};
 </script>
