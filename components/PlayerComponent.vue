@@ -23,7 +23,7 @@
     </button>
     <div class="flex flex-col gap-3">
       <h4 class="text-xl">Alle Spieler:</h4>
-      <div class="flex gap-5 w-full flex-wrap" v-if="players?.length > 0">
+      <div class="flex gap-5 w-full justify-between" v-if="players?.length > 0">
         <select v-model="playerToTeam">
           <option value="">Spieler auswählen...</option>
           <option v-for="player in players" :value="player.uuid">
@@ -36,16 +36,15 @@
             {{ team.team_name }}
           </option>
         </select>
-        <button
-          @click="
-            async () => await store.assignToTeam(playerToTeam, belongsToTeam)
-          "
-          class="bg-gray-400 p-1 rounded-md text-white"
-        >
-          In Team zuweisen
-        </button>
       </div>
-      <p v-else>Keine Spieler vorhanden</p>
+      <button
+        @click="
+          async () => await store.assignToTeam(playerToTeam, belongsToTeam)
+        "
+        class="bg-gray-400 p-1 rounded-md text-white"
+      >
+        In Team zuweisen
+      </button>
     </div>
   </div>
 </template>
