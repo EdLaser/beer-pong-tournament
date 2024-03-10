@@ -19,10 +19,10 @@
       class="bg-gray-400 rounded-md text-white flex-col p-2"
       v-for="team in teams"
     >
-      <h3 class="text-lg">{{ team.team_name }}</h3>
+      <h3 class="text-xl">{{ team.team_name }}</h3>
       <div v-if="team.players?.length > 0">
         <p>Spieler im Team:</p>
-        <div>
+        <div class="divide-x">
           <span v-for="player in team.players">{{ player.name }}, </span>
         </div>
       </div>
