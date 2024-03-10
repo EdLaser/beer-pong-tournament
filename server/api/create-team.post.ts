@@ -9,6 +9,5 @@ export default defineEventHandler(async (event) => {
       team_name: teamName,
     },
   });
-  console.log(data);
   return 200;
 });
