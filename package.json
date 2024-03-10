@@ -7,10 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare && prisma db pull && prisma generate"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.14.2",
     "@prisma/client": "^5.10.2",
     "nuxt": "^3.10.3",
     "vue": "^3.4.21",
