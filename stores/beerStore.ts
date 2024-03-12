@@ -28,36 +28,31 @@ export const useBeerStore = defineStore("beerStore", () => {
   const teams = ref([] as Array<Team>);
 
   const fetchMatches = async () => {
-    const { data, pending, error } = await useFetch<Array<MatchData>>(
-      "/api/get-matches",
-      {
-        method: "GET",
-      }
-    );
-    matches.value = data.value ? data.value : [];
+    const data = await $fetch<Array<MatchData>>("/api/get-matches", {
+      method: "GET",
+    });
+    matches.value = data ? data : [];
   };
 
   const fetchTeams = async () => {
-    const { data, pending, error } = await useFetch<Array<Team>>(
-      "/api/get-teams",
+    const data = await $fetch<Array<Team>>("/api/get-teams", {
+      method: "GET",
+    });
+    teams.value = data ? data : [];
+  };
+
+  const fetchPlayers = async () => {
+    const data = await $fetch<Array<{ name: string; uuid: string }>>(
+      "/api/get-players",
       {
         method: "GET",
       }
     );
-    teams.value = data.value ? data.value : [];
-  };
-
-  const fetchPlayers = async () => {
-    const { data, pending, error } = await useFetch<
-      Array<{ name: string; uuid: string }>
-    >("/api/get-players", {
-      method: "GET",
-    });
-    players.value = data.value ? data.value : [];
+    players.value = data ? data : [];
   };
 
   const createTeam = async (teamName: string) => {
-    await useFetch("/api/create-team", {
+    await $fetch("/api/create-team", {
       method: "POST",
       body: { teamName: teamName },
     });
@@ -65,7 +60,7 @@ export const useBeerStore = defineStore("beerStore", () => {
   };
 
   const createMatch = async (team1: string, team2: string) => {
-    await useFetch("/api/create-match", {
+    await $fetch("/api/create-match", {
       method: "POST",
       body: {
         team1: team1,
@@ -76,7 +71,7 @@ export const useBeerStore = defineStore("beerStore", () => {
   };
 
   const createPlayer = async (belongsToTeam: string, playerName: string) => {
-    await useFetch("/api/create-player", {
+    await $fetch("/api/create-player", {
       method: "POST",
       body: {
         name: playerName,
@@ -88,7 +83,7 @@ export const useBeerStore = defineStore("beerStore", () => {
   };
 
   const assignToTeam = async (playerToTeam: string, belongsToTeam: string) => {
-    await useFetch("/api/assign-player-to-team", {
+    await $fetch("/api/assign-player-to-team", {
       method: "POST",
       body: {
         uuid: playerToTeam,
