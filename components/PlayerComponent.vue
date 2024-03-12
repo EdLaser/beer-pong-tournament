@@ -1,11 +1,11 @@
 <template>
-  <h1 class="text-5xl/normal">Players</h1>
+  <h1 class="text-5xl/normal">Spieler</h1>
   <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
     <div class="flex gap-3 justify-between">
       <Input
         type="text"
         class="p-1 rounded-md"
-        placeholder="Playername"
+        placeholder="Spielername..."
         v-model="playerName"
       />
       <select v-model="belongsToTeam">
@@ -17,9 +17,9 @@
     </div>
     <Button
       @click="async () => store.createPlayer(belongsToTeam, playerName)"
-      class="bg-gray-400 p-1 rounded-md text-white mb-6"
+      class="bg-violet-700 p-1 rounded-md text-white mb-6"
     >
-      Player erstellen
+      Spieler erstellen
     </Button>
     <div class="flex flex-col gap-3">
       <h4 class="text-xl">Alle Spieler:</h4>
@@ -37,14 +37,14 @@
           </option>
         </select>
       </div>
-      <button
+      <Button
         @click="
           async () => await store.assignToTeam(playerToTeam, belongsToTeam)
         "
-        class="bg-gray-400 p-1 rounded-md text-white"
+        class="bg-violet-700 p-1 rounded-md text-white"
       >
         In Team zuweisen
-      </button>
+      </Button>
     </div>
   </div>
 </template>

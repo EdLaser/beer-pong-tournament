@@ -1,15 +1,15 @@
 <template>
   <h1 class="text-5xl/normal">Teams</h1>
-  <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
+  <div class="flex gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
     <Input
       type="text"
-      class="p-1 rounded-md"
-      placeholder="Teamname"
+      class="p-1 rounded-md accent-yellow-600"
+      placeholder="Teamname..."
       v-model="teamName"
     />
     <Button
       @click="async () => await store.createTeam(teamName)"
-      class="bg-gray-400 p-1 rounded-md text-white"
+      class="bg-violet-700 p-1 rounded-md text-white"
     >
       Team erstellen
     </Button>
@@ -19,6 +19,7 @@
       class="rounded-md text-white flex-col p-2"
       :class="determineColor(index)"
       v-for="(team, index) in teams"
+      v-if="teams?.length > 0"
     >
       <h3 class="text-2xl">{{ team.team_name }}</h3>
       <div v-if="team.players?.length > 0">
@@ -31,6 +32,9 @@
           </span>
         </div>
       </div>
+    </div>
+    <div v-else>
+      <p>Keine Teams vorhanden</p>
     </div>
   </div>
 </template>

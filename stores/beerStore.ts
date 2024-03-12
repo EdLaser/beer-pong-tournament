@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Team } from "~/components/TeamComponent.vue";
+import { useToast } from "@/components/ui/toast/use-toast";
 
 type MatchData = {
   uuid: string;
@@ -22,7 +23,17 @@ type MatchData = {
   missingCups: number;
 };
 
+const checkForEmtpyInput = (values: Array<any>) => {
+  for (const value of values) {
+    if (value === "" || value === null || value === undefined) {
+      return true;
+    }
+  }
+  return false;
+};
+
 export const useBeerStore = defineStore("beerStore", () => {
+  const { toast } = useToast();
   const matches = ref([] as Array<MatchData>);
   const players = ref([] as Array<{ name: string; uuid: string }>);
   const teams = ref([] as Array<Team>);
@@ -31,14 +42,14 @@ export const useBeerStore = defineStore("beerStore", () => {
     const data = await $fetch<Array<MatchData>>("/api/get-matches", {
       method: "GET",
     });
-    matches.value = data ? data : [];
+    matches.value = data ?? [];
   };
 
   const fetchTeams = async () => {
     const data = await $fetch<Array<Team>>("/api/get-teams", {
       method: "GET",
     });
-    teams.value = data ? data : [];
+    teams.value = data ?? [];
   };
 
   const fetchPlayers = async () => {
@@ -48,10 +59,13 @@ export const useBeerStore = defineStore("beerStore", () => {
         method: "GET",
       }
     );
-    players.value = data ? data : [];
+    players.value = data ?? [];
   };
 
   const createTeam = async (teamName: string) => {
+    if (teamName === "" || teamName === null || teamName === undefined) {
+      toast({ description: "Gib einen Teamnamen ein!" });
+    }
     await $fetch("/api/create-team", {
       method: "POST",
       body: { teamName: teamName },
@@ -60,6 +74,9 @@ export const useBeerStore = defineStore("beerStore", () => {
   };
 
   const createMatch = async (team1: string, team2: string) => {
+    if (team1 === "null" || team2 === "null") {
+      toast({ description: "Wähle zwei Teams aus!" });
+    }
     await $fetch("/api/create-match", {
       method: "POST",
       body: {
@@ -71,6 +88,11 @@ export const useBeerStore = defineStore("beerStore", () => {
   };
 
   const createPlayer = async (belongsToTeam: string, playerName: string) => {
+    if (playerName === "") {
+      toast({ description: "Gib einen Spielernamen ein!" });
+    } else if (belongsToTeam === "null") {
+      toast({ description: "Wähle ein Team aus!" });
+    }
     await $fetch("/api/create-player", {
       method: "POST",
       body: {
@@ -83,6 +105,9 @@ export const useBeerStore = defineStore("beerStore", () => {
   };
 
   const assignToTeam = async (playerToTeam: string, belongsToTeam: string) => {
+    if (checkForEmtpyInput([playerToTeam, belongsToTeam])) {
+      return;
+    }
     await $fetch("/api/assign-player-to-team", {
       method: "POST",
       body: {

@@ -3,8 +3,12 @@
   <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
     <div class="flex justify-between">
       <div class="flex flex-col gap-1">
-        <label>Team 1</label>
-        <select class="rounded-md ring-1 ring-gray-400 p-1" v-model="team1">
+        <label for="team_one_select">Team 1</label>
+        <select
+          id="team_one_select"
+          class="rounded-md ring-1 ring-gray-400 p-1"
+          v-model="team1"
+        >
           <option value="null" disabled>Auswählen...</option>
           <option v-for="team in teams" :value="team.uuid">
             {{ team.team_name }}
@@ -12,8 +16,12 @@
         </select>
       </div>
       <div class="flex flex-col gap-1">
-        <label>Team 2</label>
-        <select class="rounded-md ring-1 ring-gray-400 p-1" v-model="team2">
+        <label for="team_two_select">Team 2</label>
+        <select
+          id="team_two_select"
+          class="rounded-md ring-1 ring-gray-400 p-1"
+          v-model="team2"
+        >
           <option value="null" disabled>Auswählen...</option>
           <option v-for="team in teams" :value="team.uuid">
             {{ team.team_name }}
@@ -23,7 +31,7 @@
     </div>
     <Button
       @click="async () => await store.createMatch(team1, team2)"
-      class="bg-gray-400 p-1 rounded-md text-white"
+      class="bg-violet-700 p-1 rounded-md text-white"
     >
       Match erstellen
     </Button>

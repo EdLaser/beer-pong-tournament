@@ -68,7 +68,7 @@
           />
         </div>
         <Button
-          class="bg-gray-400 rounded-md p-1 text-white"
+          class="bg-violet-700 rounded-md p-1 text-white"
           @click="updateMatch(props.uuid)"
         >
           Match updaten
