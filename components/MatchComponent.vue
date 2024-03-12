@@ -21,12 +21,12 @@
         </select>
       </div>
     </div>
-    <button
+    <Button
       @click="async () => await store.createMatch(team1, team2)"
       class="bg-gray-400 p-1 rounded-md text-white"
     >
       Match erstellen
-    </button>
+    </Button>
   </div>
   <div class="flex flex-col">
     <h3 class="text-lg">Alle Matches:</h3>
@@ -47,6 +47,8 @@
 </template>
 
 <script lang="ts" setup>
+import Button from "./ui/button/Button.vue";
+
 const store = useBeerStore();
 const { teams, matches } = storeToRefs(store);
 

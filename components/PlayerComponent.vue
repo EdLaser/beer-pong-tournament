@@ -15,12 +15,12 @@
         </option>
       </select>
     </div>
-    <button
+    <Button
       @click="async () => store.createPlayer(belongsToTeam, playerName)"
       class="bg-gray-400 p-1 rounded-md text-white mb-6"
     >
       Player erstellen
-    </button>
+    </Button>
     <div class="flex flex-col gap-3">
       <h4 class="text-xl">Alle Spieler:</h4>
       <div class="flex gap-5 w-full justify-between" v-if="players?.length > 0">

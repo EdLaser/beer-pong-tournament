@@ -16,6 +16,7 @@ type MatchData = {
   winner?: {
     uuid: string | null;
     team_name: string | null;
+    players: any[];
   };
   draw: boolean;
   missingCups: number;

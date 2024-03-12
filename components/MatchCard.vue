@@ -67,12 +67,12 @@
             placeholder="Fehlende Becher"
           />
         </div>
-        <button
+        <Button
           class="bg-gray-400 rounded-md p-1 text-white"
           @click="updateMatch(props.uuid)"
         >
           Match updaten
-        </button>
+        </Button>
       </div>
     </div>
   </div>
@@ -80,6 +80,7 @@
 
 <script lang="ts" setup>
 import type { Team } from "./TeamComponent.vue";
+import Button from "./ui/button/Button.vue";
 
 const props = defineProps<{
   nummer: number;

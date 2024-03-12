@@ -7,12 +7,12 @@
       placeholder="Teamname"
       v-model="teamName"
     />
-    <button
+    <Button
       @click="async () => await store.createTeam(teamName)"
       class="bg-gray-400 p-1 rounded-md text-white"
     >
       Team erstellen
-    </button>
+    </Button>
   </div>
   <div class="grid grid-cols-2 gap-2 mb-16">
     <div
@@ -35,6 +35,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import Button from "./ui/button/Button.vue";
+
 export type Team = {
   uuid: string;
   team_name: string;
