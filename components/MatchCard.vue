@@ -48,8 +48,8 @@
           <option :value="team2.uuid">
             {{ team2.team_name }}
           </option>
-          <option :value="winner.uuid" v-if="winner.uuid !== ''">
-            {{ winner.team_name }}
+          <option :value="winner" v-if="winner !== ''">
+            {{ props.winner?.team_name }}
           </option>
         </select>
       </div>
@@ -93,7 +93,7 @@ const props = defineProps<{
 
 const teamGiven1 = ref(props.team1.uuid);
 const teamGiven2 = ref(props.team2.uuid);
-const winner = ref(props.winner.uuid ? props.winner.uuid : { uuid: "" });
+const winner = ref(props.winner?.uuid ? props.winner.uuid : "");
 const isDraw = ref(props.isDraw ? props.isDraw : false);
 const missingCups = ref(props.missingCups ? props.missingCups : 0);
 
