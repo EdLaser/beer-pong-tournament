@@ -131,7 +131,8 @@ const updateMatch = async (uuid: string) => {
       team2: teamGiven2.value,
       winner: winner.value,
       isDraw: isDraw.value,
-      missingCups: missingCups.value,
+      missingCupsTeam1: missingCupsTeam1.value,
+      missingCupsTeam2: missingCupsTeam2.value,
     },
   });
   await refresh();

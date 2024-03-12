@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
       team_2: body.team2,
       winner: body.winner,
       draw: body.isDraw,
-      missing_cups: body.missingCups,
+      missing_cups_team_1: body.missingCupsTeam1,
+      missing_cups_team_2: body.missingCupsTeam2,
     },
   });
   console.log(data);
