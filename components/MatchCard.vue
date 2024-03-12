@@ -56,9 +56,9 @@
       <div class="flex gap-3 flex-col">
         <div class="flex gap-3 justify-between">
           <label for="">Unentschieden?</label>
-          <input type="checkbox" v-model="isDraw" class="accent-green-700" />
+          <input type="checkbox" v-model="isDraw" class="accent-violet-700" />
         </div>
-        <div class="flex gap-3 justify-between">
+        <div class="flex gap-3 justify-between" v-if="isDraw">
           <label for="missingCupsTeam1">Fehlende Becher</label>
           <Input
             type="number"

@@ -17,7 +17,7 @@
     </div>
     <Button
       @click="async () => store.createPlayer(belongsToTeam, playerName)"
-      class="bg-violet-700 p-1 rounded-md text-white mb-6"
+      class="bg-violet-700 p-1 rounded-md text-white"
     >
       Spieler erstellen
     </Button>
