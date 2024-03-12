@@ -36,8 +36,8 @@
       Match erstellen
     </Button>
   </div>
-  <div class="flex flex-col" v-if="matches.length > 0">
-    <h3 class="text-lg">Alle Matches:</h3>
+  <div class="flex flex-col gap-3" v-if="matches.length > 0">
+    <h3 class="text-2xl">Alle Matches:</h3>
     <div class="flex flex-col gap-3">
       <MatchCard
         v-for="(match, index) in matches"

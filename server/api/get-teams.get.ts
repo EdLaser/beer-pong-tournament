@@ -11,6 +11,9 @@ export default defineEventHandler((event) => {
         },
       },
     },
+    orderBy: {
+      created_at: "desc",
+    },
   });
   return data;
 });

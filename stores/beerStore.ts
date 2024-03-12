@@ -32,12 +32,30 @@ const checkForEmtpyInput = (values: Array<any>) => {
   return false;
 };
 
+const generateGroups = (teams: Array<Team>, groupSize: number) => {
+  const groups: Array<{ name: string; teams: Array<Team> }> = [];
+
+  const amountOfGroups = Math.ceil(teams.length / groupSize);
+
+  for (let i = 0; i < amountOfGroups; i++) {
+    groups.push({
+      name: `Gruppe ${i + 1}`,
+      teams: teams.slice(i * groupSize, i * groupSize + groupSize),
+    });
+  }
+  return groups;
+};
+
 export const useBeerStore = defineStore("beerStore", () => {
   const { toast } = useToast();
   const matches = ref([] as Array<MatchData>);
   const players = ref([] as Array<{ name: string; uuid: string }>);
   const teams = ref([] as Array<Team>);
-  const groups = ref([] as Array<{ name: string; uuid: string }>);
+  const groupSize = ref(2);
+  
+  const calculatedGroups = computed(() => {
+    return generateGroups(teams.value, groupSize.value);
+  });
 
   const fetchMatches = async () => {
     const data = await $fetch<Array<MatchData>>("/api/get-matches", {
@@ -133,6 +151,8 @@ export const useBeerStore = defineStore("beerStore", () => {
     matches,
     players,
     teams,
+    groupSize,
+    calculatedGroups,
     fetchMatches,
     fetchTeams,
     fetchPlayers,

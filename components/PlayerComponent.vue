@@ -1,11 +1,14 @@
 <template>
-  <h1 class="text-5xl/normal">Spieler <Icon name="arcticons:taskwarrior" /></h1>
+  <h1 class="text-5xl/normal">
+    Bierkrieger <Icon name="arcticons:taskwarrior" />
+  </h1>
   <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
+    <h4 class="text-xl">Bierkrieger hinzufügen</h4>
     <div class="flex gap-3 justify-between">
       <Input
         type="text"
         class="p-1 rounded-md"
-        placeholder="Spielername..."
+        placeholder="Kriegername..."
         v-model="playerName"
       />
       <select
@@ -22,20 +25,20 @@
       @click="async () => store.createPlayer(belongsToTeam, playerName)"
       class="bg-violet-700 p-1 rounded-md text-white"
     >
-      Spieler erstellen
+      Bierkrieger erstellen
     </Button>
   </div>
   <div
     class="flex flex-col gap-3 mb-16 ring-2 ring-gray-400 rounded-md p-2"
     v-if="players?.length > 0"
   >
-    <h4 class="text-xl">Alle Spieler:</h4>
-    <div class="flex gap-5 w-full justify-between">
+    <h4 class="text-xl">Alle Bierkrieger:</h4>
+    <div class="flex w-full justify-between">
       <select
         v-model="playerToTeam"
         class="rounded-md ring-1 ring-gray-400 p-1"
       >
-        <option value="">Spieler auswählen...</option>
+        <option value="">Krieger auswählen...</option>
         <option v-for="player in players" :value="player.uuid">
           {{ player.name }}
         </option>
@@ -58,7 +61,7 @@
     </Button>
   </div>
   <div class="flex" v-else>
-    <p class="mb-16 text-xl font-thin">Noch keine Spieler vorhanden.</p>
+    <p class="mb-16 text-xl font-thin">Noch keine Bierkrieger vorhanden.</p>
   </div>
 </template>
 

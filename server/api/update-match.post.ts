@@ -1,6 +1,5 @@
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  console.log(body);
   const data = await usePrisma(event).matches.update({
     where: {
       uuid: body.uuid,
@@ -14,6 +13,5 @@ export default defineEventHandler(async (event) => {
       missing_cups_team_2: body.missingCupsTeam2,
     },
   });
-  console.log(data);
   return 200;
 });

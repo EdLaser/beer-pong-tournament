@@ -1,13 +1,13 @@
 <template>
   <div class="ring-2 ring-gray-400 rounded-md flex-col p-2">
-    <h2 class="text-3xl">Matchnr. {{ nummer }}</h2>
+    <h2 class="text-3xl mb-2">Matchnr. {{ nummer }}</h2>
     <div class="text-xl flex justify-between mb-5">
       <span>{{ team1.team_name }}</span
       ><span>vs.</span>
       <span>{{ team2.team_name }}</span>
     </div>
     <div class="flex flex-col justify-between gap-3">
-      <div class="flex justify-between gap-3">
+      <div class="flex justify-between gap-3" v-show="false">
         <div class="flex flex-col gap-1">
           <label for="">Team 1</label>
           <select
@@ -33,7 +33,7 @@
           </select>
         </div>
       </div>
-      <div class="flex flex-col gap-1" v-if="!isDraw">
+      <div class="flex flex-col gap-1">
         <label for="">Gewinner</label>
         <select
           class="rounded-md ring-1 ring-gray-400 p-1"
@@ -54,35 +54,36 @@
         </select>
       </div>
       <div class="flex gap-3 flex-col">
-        <div class="flex gap-3 justify-between">
-          <label for="">Unentschieden?</label>
-          <input type="checkbox" v-model="isDraw" class="accent-violet-700" />
+        <p class="text-xl">Fehlende Becher der Teams</p>
+        <div class="flex justify-between">
+          <div class="flex flex-col">
+            <label for="missingCupsTeam1">{{ team1.team_name }}</label>
+            <Input
+              type="number"
+              v-model="missingCupsTeam1"
+              class="rounded-md ring-1 ring-gray-400 p-1"
+              placeholder="Fehlende Becher"
+              id="missingCupsTeam1"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="missingCupsTeam2">{{ team2.team_name }}</label>
+            <Input
+              type="number"
+              v-model="missingCupsTeam1"
+              class="rounded-md ring-1 ring-gray-400 p-1"
+              placeholder="Fehlende Becher"
+              id="missingCupsTeam2"
+            />
+          </div>
         </div>
-        <div class="flex gap-3 justify-between" v-if="isDraw">
-          <label for="missingCupsTeam1">Fehlende Becher</label>
-          <Input
-            type="number"
-            v-model="missingCupsTeam1"
-            class="rounded-md ring-1 ring-gray-400 p-1"
-            placeholder="Fehlende Becher"
-            id="missingCupsTeam1"
-          />
-          <label for="missingCupsTeam2">Fehlende Becher</label>
-          <Input
-            type="number"
-            v-model="missingCupsTeam1"
-            class="rounded-md ring-1 ring-gray-400 p-1"
-            placeholder="Fehlende Becher"
-            id="missingCupsTeam2"
-          />
-        </div>
-        <Button
-          class="bg-violet-700 rounded-md p-1 text-white"
-          @click="updateMatch(props.uuid)"
-        >
-          Match updaten
-        </Button>
       </div>
+      <Button
+        class="bg-violet-700 rounded-md p-1 text-white"
+        @click="updateMatch(props.uuid)"
+      >
+        Match updaten
+      </Button>
     </div>
   </div>
 </template>
@@ -137,5 +138,4 @@ const updateMatch = async (uuid: string) => {
   });
   await refresh();
 };
-console.log(winner.value);
 </script>
