@@ -14,12 +14,11 @@
       Team erstellen
     </Button>
   </div>
-  <div class="grid grid-cols-2 gap-2 mb-16">
+  <div class="grid grid-cols-2 gap-2 mb-16" v-if="teams?.length > 0">
     <div
       class="rounded-md text-white flex-col p-2"
       :class="determineColor(index)"
       v-for="(team, index) in teams"
-      v-if="teams?.length > 0"
     >
       <h3 class="text-2xl">{{ team.team_name }}</h3>
       <div v-if="team.players?.length > 0">
@@ -33,9 +32,9 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <p>Keine Teams vorhanden</p>
-    </div>
+  </div>
+  <div v-else>
+    <p class="mb-16 text-xl font-thin">Noch keine Teams vorhanden.</p>
   </div>
 </template>
 <script setup lang="ts">

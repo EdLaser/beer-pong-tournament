@@ -36,7 +36,7 @@
       Match erstellen
     </Button>
   </div>
-  <div class="flex flex-col">
+  <div class="flex flex-col" v-if="matches.length > 0">
     <h3 class="text-lg">Alle Matches:</h3>
     <div class="flex flex-col gap-3">
       <MatchCard
@@ -51,6 +51,9 @@
         :missing-cups="match.missingCups"
       />
     </div>
+  </div>
+  <div class="flex" v-else>
+    <p class="mb-16 text-xl font-thin">Noch keine Matches vorhanden.</p>
   </div>
 </template>
 
