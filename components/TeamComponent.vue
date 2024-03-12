@@ -28,14 +28,14 @@
   </div>
   <div
     class="flex flex-col ring-2 ring-gray-400 rounded-md p-2 mb-4"
-    v-for="group in calculatedGroups"
+    v-for="(group, groupIndex) in calculatedGroups"
   >
     <h4 class="text-3xl mb-2">{{ group.name }}</h4>
     <div class="grid grid-cols-2 gap-2">
       <div
         class="rounded-md text-white flex-col p-2"
-        :class="determineColor(index)"
-        v-for="(team, index) in group.teams"
+        :class="group.groupClass"
+        v-for="team in group.teams"
       >
         <h3 class="text-2xl">{{ team.team_name }}</h3>
         <div>
@@ -66,16 +66,6 @@ export type Team = {
 const store = useBeerStore();
 const { groupSize, calculatedGroups } = storeToRefs(store);
 const teamName = ref("");
-
-const determineColor = (index: number) => {
-  if (index === 0 || index === 2 || index === 4) {
-    return "bg-pink-500";
-  } else if (index === 1 || index === 3 || index === 5) {
-    return "bg-emerald-600";
-  } else {
-    return "bg-violet-700";
-  }
-};
 
 const handleGroupSize = () => {
   if (groupSize.value === 2) {

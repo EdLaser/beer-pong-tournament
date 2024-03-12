@@ -32,30 +32,50 @@ const checkForEmtpyInput = (values: Array<any>) => {
   return false;
 };
 
-const generateGroups = (teams: Array<Team>, groupSize: number) => {
-  const groups: Array<{ name: string; teams: Array<Team> }> = [];
-
-  const amountOfGroups = Math.ceil(teams.length / groupSize);
-
-  for (let i = 0; i < amountOfGroups; i++) {
-    groups.push({
-      name: `Gruppe ${i + 1}`,
-      teams: teams.slice(i * groupSize, i * groupSize + groupSize),
-    });
-  }
-  return groups;
-};
-
 export const useBeerStore = defineStore("beerStore", () => {
   const { toast } = useToast();
   const matches = ref([] as Array<MatchData>);
   const players = ref([] as Array<{ name: string; uuid: string }>);
   const teams = ref([] as Array<Team>);
-  const groupSize = ref(2);
   
+  const groupSize = ref(2);
   const calculatedGroups = computed(() => {
     return generateGroups(teams.value, groupSize.value);
   });
+
+  const colors = [
+    "bg-red-700",
+    "bg-blue-700",
+    "bg-emerald-700",
+    "bg-cyan-700",
+    "bg-indigo-700",
+    "bg-violet-700",
+    "bg-purple-700",
+    "bg-fuchsia-700",
+  ];
+
+  const generateGroups = (teams: Array<Team>, groupSize: number) => {
+    const groups: Array<{
+      name: string;
+      teams: Array<Team>;
+      groupClass: string;
+    }> = [];
+
+    const amountOfGroups = Math.ceil(teams.length / groupSize);
+
+    for (let i = 0; i < amountOfGroups; i++) {
+      groups.push({
+        name: `Gruppe ${i + 1}`,
+        teams: teams.slice(i * groupSize, i * groupSize + groupSize),
+        groupClass: determineColor(),
+      });
+    }
+    return groups;
+  };
+
+  const determineColor = () => {
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
 
   const fetchMatches = async () => {
     const data = await $fetch<Array<MatchData>>("/api/get-matches", {
