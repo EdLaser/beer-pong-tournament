@@ -56,11 +56,11 @@
       <div class="flex gap-3 flex-col">
         <div class="flex gap-3 justify-between">
           <label for="">Unentschieden?</label>
-          <input type="checkbox" v-model="isDraw" class="accent-green-700" />
+          <Input type="checkbox" v-model="isDraw" class="accent-green-700" />
         </div>
         <div class="flex gap-3 justify-between">
           <label for="">Fehlende Becher</label>
-          <input
+          <Input
             type="number"
             v-model="missingCups"
             class="rounded-md ring-1 ring-gray-400 p-1"

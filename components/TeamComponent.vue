@@ -1,7 +1,7 @@
 <template>
   <h1 class="text-5xl/normal">Teams</h1>
   <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
-    <input
+    <Input
       type="text"
       class="p-1 rounded-md"
       placeholder="Teamname"

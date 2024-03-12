@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "shadcn-nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "shadcn-nuxt", "nuxt-icon"],
   shadcn: {
     /**
      * Prefix for all the imported component

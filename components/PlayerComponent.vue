@@ -2,7 +2,7 @@
   <h1 class="text-5xl/normal">Players</h1>
   <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
     <div class="flex gap-3 justify-between">
-      <input
+      <Input
         type="text"
         class="p-1 rounded-md"
         placeholder="Playername"
