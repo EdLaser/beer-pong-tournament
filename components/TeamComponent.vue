@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-5xl/normal">Teams</h1>
+  <h1 class="text-5xl/normal">Teams <Icon name="fluent:people-community-28-regular"/></h1>
   <div class="flex gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
     <Input
       type="text"

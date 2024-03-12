@@ -1,5 +1,7 @@
 <template>
-  <h1 class="text-5xl/normal text-center mb-20">Dein Beerpong Tournier</h1>
+  <h1 class="text-5xl/normal text-center mb-20">
+    Dein Beerpong Tournier <Icon name="fluent-emoji-flat:beer-mug" />
+  </h1>
   <TeamComponent />
   <PlayerComponent />
   <MatchComponent />

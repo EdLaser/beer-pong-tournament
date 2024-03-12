@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-5xl/normal">Spieler</h1>
+  <h1 class="text-5xl/normal">Spieler <Icon name="arcticons:taskwarrior" /></h1>
   <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
     <div class="flex gap-3 justify-between">
       <Input
