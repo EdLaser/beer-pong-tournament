@@ -22,7 +22,7 @@
       Spieler erstellen
     </Button>
   </div>
-  <div class="flex flex-col gap-3" v-if="players?.length > 0">
+  <div class="flex flex-col gap-3 mb-16 ring-2 ring-gray-400 rounded-md p-2" v-if="players?.length > 0">
     <h4 class="text-xl">Alle Spieler:</h4>
     <div class="flex gap-5 w-full justify-between">
       <select v-model="playerToTeam">

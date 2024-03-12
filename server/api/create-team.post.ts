@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   }
   const data = await usePrisma(event).teams.create({
     data: {
-      team_name: teamName,
+      team_name: teamName.trimg(),
     },
   });
   return 200;
