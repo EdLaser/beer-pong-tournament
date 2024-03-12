@@ -13,7 +13,8 @@ model matches {
   team_1                      String  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   team_2                      String  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   draw                        Boolean @default(false)
-  missing_cups                Int?    @db.SmallInt
+  missing_cups_team_1         Int?    @db.SmallInt
+  missing_cups_team_2         Int?    @db.SmallInt
   winner                      String? @db.Uuid
   teams_matches_team_1Toteams teams   @relation("matches_team_1Toteams", fields: [team_1], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_team_1_fkey")
   teams_matches_team_2Toteams teams   @relation("matches_team_2Toteams", fields: [team_2], references: [uuid], onDelete: NoAction, onUpdate: NoAction, map: "public_matches_team_2_fkey")

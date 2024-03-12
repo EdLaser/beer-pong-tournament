@@ -56,15 +56,24 @@
       <div class="flex gap-3 flex-col">
         <div class="flex gap-3 justify-between">
           <label for="">Unentschieden?</label>
-          <Input type="checkbox" v-model="isDraw" class="accent-green-700" />
+          <input type="checkbox" v-model="isDraw" class="accent-green-700" />
         </div>
         <div class="flex gap-3 justify-between">
-          <label for="">Fehlende Becher</label>
+          <label for="missingCupsTeam1">Fehlende Becher</label>
           <Input
             type="number"
-            v-model="missingCups"
+            v-model="missingCupsTeam1"
             class="rounded-md ring-1 ring-gray-400 p-1"
             placeholder="Fehlende Becher"
+            id="missingCupsTeam1"
+          />
+          <label for="missingCupsTeam2">Fehlende Becher</label>
+          <Input
+            type="number"
+            v-model="missingCupsTeam1"
+            class="rounded-md ring-1 ring-gray-400 p-1"
+            placeholder="Fehlende Becher"
+            id="missingCupsTeam2"
           />
         </div>
         <Button
@@ -89,14 +98,20 @@ const props = defineProps<{
   team2: Team;
   winner?: Team | null;
   isDraw?: boolean | null;
-  missingCups?: number | null;
+  missingCupsTeam1?: number | null;
+  missingCupsTeam2?: number | null;
 }>();
 
 const teamGiven1 = ref(props.team1.uuid);
 const teamGiven2 = ref(props.team2.uuid);
 const winner = ref(props.winner?.uuid ? props.winner.uuid : "");
 const isDraw = ref(props.isDraw ? props.isDraw : false);
-const missingCups = ref(props.missingCups ? props.missingCups : 0);
+const missingCupsTeam1 = ref(
+  props.missingCupsTeam1 ? props.missingCupsTeam1 : 0
+);
+const missingCupsTeam2 = ref(
+  props.missingCupsTeam2 ? props.missingCupsTeam2 : 0
+);
 
 const {
   data: teams,
