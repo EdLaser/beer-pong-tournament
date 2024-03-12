@@ -8,7 +8,10 @@
         placeholder="Spielername..."
         v-model="playerName"
       />
-      <select v-model="belongsToTeam">
+      <select
+        v-model="belongsToTeam"
+        class="rounded-md ring-1 ring-gray-400 p-1"
+      >
         <option value="null" disabled>Gehört ins Team...</option>
         <option v-for="team in teams" :value="team.uuid">
           {{ team.team_name }}
@@ -22,16 +25,25 @@
       Spieler erstellen
     </Button>
   </div>
-  <div class="flex flex-col gap-3 mb-16 ring-2 ring-gray-400 rounded-md p-2" v-if="players?.length > 0">
+  <div
+    class="flex flex-col gap-3 mb-16 ring-2 ring-gray-400 rounded-md p-2"
+    v-if="players?.length > 0"
+  >
     <h4 class="text-xl">Alle Spieler:</h4>
     <div class="flex gap-5 w-full justify-between">
-      <select v-model="playerToTeam">
+      <select
+        v-model="playerToTeam"
+        class="rounded-md ring-1 ring-gray-400 p-1"
+      >
         <option value="">Spieler auswählen...</option>
         <option v-for="player in players" :value="player.uuid">
           {{ player.name }}
         </option>
       </select>
-      <select v-model="belongsToTeam">
+      <select
+        v-model="belongsToTeam"
+        class="rounded-md ring-1 ring-gray-400 p-1"
+      >
         <option value="null" disabled>Gehört ins Team...</option>
         <option v-for="team in teams" :value="team.uuid">
           {{ team.team_name }}
@@ -39,9 +51,7 @@
       </select>
     </div>
     <Button
-      @click="
-        async () => await store.assignToTeam(playerToTeam, belongsToTeam)
-      "
+      @click="async () => await store.assignToTeam(playerToTeam, belongsToTeam)"
       class="bg-violet-700 p-1 rounded-md text-white"
     >
       In Team zuweisen
