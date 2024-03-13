@@ -33,7 +33,7 @@
     <h4 class="text-3xl mb-2">{{ group.name }}</h4>
     <div class="grid grid-cols-2 gap-2">
       <div
-        :class="'rounded-md text-white flex-col p-2' + determineColor()"
+        :class="'rounded-md text-white flex-col p-2 ' + determineColor()"
         v-for="team in group.teams"
       >
         <h3 class="text-2xl">{{ team.team_name }}</h3>
