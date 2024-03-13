@@ -43,22 +43,10 @@ export const useBeerStore = defineStore("beerStore", () => {
     return generateGroups(teams.value, groupSize.value);
   });
 
-  const colors = [
-    "bg-red-700",
-    "bg-blue-700",
-    "bg-emerald-700",
-    "bg-cyan-700",
-    "bg-indigo-700",
-    "bg-violet-700",
-    "bg-purple-700",
-    "bg-fuchsia-700",
-  ];
-
   const generateGroups = (teams: Array<Team>, groupSize: number) => {
     const groups: Array<{
       name: string;
       teams: Array<Team>;
-      groupClass: string;
     }> = [];
 
     const amountOfGroups = Math.ceil(teams.length / groupSize);
@@ -67,14 +55,9 @@ export const useBeerStore = defineStore("beerStore", () => {
       groups.push({
         name: `Gruppe ${i + 1}`,
         teams: teams.slice(i * groupSize, i * groupSize + groupSize),
-        groupClass: determineColor(),
       });
     }
     return groups;
-  };
-
-  const determineColor = () => {
-    return colors[Math.floor(Math.random() * colors.length)];
   };
 
   const fetchMatches = async () => {
