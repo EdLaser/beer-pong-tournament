@@ -37,7 +37,7 @@ export const useBeerStore = defineStore("beerStore", () => {
   const matches = ref([] as Array<MatchData>);
   const players = ref([] as Array<{ name: string; uuid: string }>);
   const teams = ref([] as Array<Team>);
-  
+
   const groupSize = ref(2);
   const calculatedGroups = computed(() => {
     return generateGroups(teams.value, groupSize.value);

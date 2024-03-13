@@ -16,11 +16,8 @@ type Team = {
 
 const teams = ref<Array<Team>>([] as Array<Team>);
 
-definePageMeta({
-  title: "Beerpong Turnier",
-  description: "Erstelle Teams und ordne Spieler zu.",
-});
 useHead({
+  title: "Beerpong Turnier",
   link: [
     {
       rel: "apple-touch-icon",

@@ -33,8 +33,7 @@
     <h4 class="text-3xl mb-2">{{ group.name }}</h4>
     <div class="grid grid-cols-2 gap-2">
       <div
-        class="rounded-md text-white flex-col p-2"
-        :class="group.groupClass"
+        :class="cn('rounded-md text-white flex-col p-2', group.groupClass)"
         v-for="team in group.teams"
       >
         <h3 class="text-2xl">{{ team.team_name }}</h3>
@@ -54,6 +53,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { cn } from "~/lib/utils";
 import Button from "./ui/button/Button.vue";
 import { toast } from "./ui/toast";
 
