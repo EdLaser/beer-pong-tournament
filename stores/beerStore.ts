@@ -32,6 +32,17 @@ const checkForEmtpyInput = (values: Array<any>) => {
   return false;
 };
 
+const colors = [
+  "bg-red-700",
+  "bg-blue-700",
+  "bg-emerald-700",
+  "bg-cyan-700",
+  "bg-indigo-700",
+  "bg-violet-700",
+  "bg-purple-700",
+  "bg-fuchsia-700",
+];
+
 export const useBeerStore = defineStore("beerStore", () => {
   const { toast } = useToast();
   const matches = ref([] as Array<MatchData>);
@@ -41,6 +52,14 @@ export const useBeerStore = defineStore("beerStore", () => {
   const groupSize = ref(2);
   const calculatedGroups = computed(() => {
     return generateGroups(teams.value, groupSize.value);
+  });
+
+  const teamColors = computed(() => {
+    const teamColors: { [key: number]: string } = {};
+    for (let i = 0; i < teams.value.length; i++) {
+      teamColors[i] = colors[Math.floor(Math.random() * colors.length)];
+    }
+    return teamColors;
   });
 
   const generateGroups = (teams: Array<Team>, groupSize: number) => {
@@ -156,6 +175,7 @@ export const useBeerStore = defineStore("beerStore", () => {
     teams,
     groupSize,
     calculatedGroups,
+    teamColors,
     fetchMatches,
     fetchTeams,
     fetchPlayers,

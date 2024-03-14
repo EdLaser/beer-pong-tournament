@@ -33,7 +33,7 @@
     <h4 class="text-3xl mb-2">{{ group.name }}</h4>
     <div class="grid grid-cols-2 gap-2">
       <div
-        :class="'rounded-md text-white flex-col p-2 ' + determineColor()"
+        :class="'rounded-md text-white flex-col p-2 ' + teamColors[groupIndex]"
         v-for="team in group.teams"
       >
         <h3 class="text-2xl">{{ team.team_name }}</h3>
@@ -53,7 +53,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { cn } from "~/lib/utils";
 import Button from "./ui/button/Button.vue";
 import { toast } from "./ui/toast";
 
@@ -64,7 +63,7 @@ export type Team = {
 };
 
 const store = useBeerStore();
-const { groupSize, calculatedGroups } = storeToRefs(store);
+const { groupSize, calculatedGroups, teamColors } = storeToRefs(store);
 const teamName = ref("");
 
 const handleGroupSize = () => {
@@ -73,20 +72,5 @@ const handleGroupSize = () => {
   } else {
     groupSize.value--;
   }
-};
-
-const colors = [
-  "bg-red-700",
-  "bg-blue-700",
-  "bg-emerald-700",
-  "bg-cyan-700",
-  "bg-indigo-700",
-  "bg-violet-700",
-  "bg-purple-700",
-  "bg-fuchsia-700",
-];
-
-const determineColor = () => {
-  return colors[Math.floor(Math.random() * colors.length)];
 };
 </script>
