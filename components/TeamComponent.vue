@@ -28,12 +28,13 @@
   </div>
   <div
     class="flex flex-col ring-2 ring-gray-400 rounded-md p-2 mb-8"
-    v-for="(group, groupIndex) in calculatedGroups"
+    v-for="group in calculatedGroups"
   >
     <h4 class="text-3xl mb-2">{{ group.name }}</h4>
     <div class="grid grid-cols-2 gap-2">
       <div
-        :class="'rounded-md text-white flex-col p-2 ' + teamColors[groupIndex]"
+        class="rounded-md text-white flex-col p-2"
+        :class="groupColors[group.name]"
         v-for="team in group.teams"
       >
         <h3 class="text-2xl">{{ team.team_name }}</h3>
@@ -43,7 +44,8 @@
             <span
               class="text-lg font-bold"
               v-for="(player, index) in team.players"
-              >{{ player.name }}{{ index + 1 < team.players.length ? "," : "" }}
+              >{{ player.name
+              }}{{ index + 1 < team.players.length ? ", " : "" }}
             </span>
           </div>
           <p class="text-sm mt-3" v-else>Noch keine Krieger.</p>
@@ -62,10 +64,32 @@ export type Team = {
   players: Array<{ name: string }>;
 };
 
+const colors = [
+  "bg-red-700",
+  "bg-blue-700",
+  "bg-emerald-700",
+  "bg-cyan-700",
+  "bg-indigo-700",
+  "bg-violet-700",
+  "bg-purple-700",
+  "bg-fuchsia-700",
+  "bg-rose-700",
+  "bg-amber-700",
+  "bg-lime-700",
+];
+
 const store = useBeerStore();
-const { optimalGroupNumber, groupSize, calculatedGroups, teamColors } =
-  storeToRefs(store);
+const { optimalGroupNumber, groupSize, calculatedGroups } = storeToRefs(store);
 const teamName = ref("");
+
+const groupColors = computed(() => {
+  const colorsCopy = [...colors];
+  const result: Record<string, string> = {};
+  for (const group of calculatedGroups.value) {
+    result[group.name] = colorsCopy.pop() || "bg-gray-700";
+  }
+  return result;
+});
 
 const handlePlus = () => {
   console.log(optimalGroupNumber.value);
