@@ -7,8 +7,6 @@
   <MatchComponent />
 </template>
 <script setup lang="ts">
-import { link } from "fs";
-
 type Team = {
   name: string;
   members: Array<string>;
