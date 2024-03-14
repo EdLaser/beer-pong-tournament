@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-5xl/normal">
+  <h1 class="text-5xl/normal mt-16">
     Bierkrieger <Icon name="arcticons:taskwarrior" />
   </h1>
   <div class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2 mb-10">
@@ -29,7 +29,7 @@
     </Button>
   </div>
   <div
-    class="flex flex-col gap-3 mb-16 ring-2 ring-gray-400 rounded-md p-2"
+    class="flex flex-col gap-3 ring-2 ring-gray-400 rounded-md p-2"
     v-if="players?.length > 0"
   >
     <h4 class="text-xl">Alle Bierkrieger:</h4>

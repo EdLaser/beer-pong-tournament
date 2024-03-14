@@ -27,7 +27,7 @@
     </div>
   </div>
   <div
-    class="flex flex-col ring-2 ring-gray-400 rounded-md p-2 mb-4"
+    class="flex flex-col ring-2 ring-gray-400 rounded-md p-2 mb-8"
     v-for="(group, groupIndex) in calculatedGroups"
   >
     <h4 class="text-3xl mb-2">{{ group.name }}</h4>
