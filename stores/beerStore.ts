@@ -54,6 +54,26 @@ export const useBeerStore = defineStore("beerStore", () => {
     return generateGroups(teams.value, groupSize.value);
   });
 
+  const optimalGroupNumber = computed(() => {
+    // Start with the square root of the total number of teams as the base for the number of groups
+    let baseGroups = Math.sqrt(teams.value.length);
+
+    // Example adjustment rule: If the square root is not an integer, check the scenarios for rounding up and down
+    if (!Number.isInteger(baseGroups)) {
+      let lowerGroups = Math.floor(baseGroups); // Option 1: Less groups, more members per group
+      let higherGroups = Math.ceil(baseGroups); // Option 2: More groups, fewer members per group
+
+      // Check which option has the least number of teams in the largest group
+      let lowerMaxTeams = Math.ceil(teams.value.length / lowerGroups);
+      let higherMaxTeams = Math.ceil(teams.value.length / higherGroups);
+
+      // Choose the option that minimizes the number of teams in the largest group
+      baseGroups = lowerMaxTeams <= higherMaxTeams ? lowerGroups : higherGroups;
+    }
+
+    return baseGroups;
+  });
+
   const teamColors = computed(() => {
     const teamColors: { [key: number]: string } = {};
     for (let i = 0; i < teams.value.length; i++) {
@@ -175,6 +195,7 @@ export const useBeerStore = defineStore("beerStore", () => {
     teams,
     groupSize,
     calculatedGroups,
+    optimalGroupNumber,
     teamColors,
     fetchMatches,
     fetchTeams,

@@ -21,8 +21,8 @@
     <div class="flex w-1/2 gap-2">
       <Input id="groupSize" v-model="groupSize" class="p-1 rounded-md" />
       <div class="flex gap-1 w-1/2">
-        <Button @click="groupSize++">+</Button>
-        <Button @click="handleGroupSize()">-</Button>
+        <Button @click="handlePlus()">+</Button>
+        <Button @click="handleMinus()">-</Button>
       </div>
     </div>
   </div>
@@ -63,10 +63,20 @@ export type Team = {
 };
 
 const store = useBeerStore();
-const { groupSize, calculatedGroups, teamColors } = storeToRefs(store);
+const { optimalGroupNumber, groupSize, calculatedGroups, teamColors } =
+  storeToRefs(store);
 const teamName = ref("");
 
-const handleGroupSize = () => {
+const handlePlus = () => {
+  console.log(optimalGroupNumber.value);
+  if (optimalGroupNumber.value === groupSize.value) {
+    toast({ description: "Gruppengröße passt!" });
+  } else {
+    groupSize.value++;
+  }
+};
+
+const handleMinus = () => {
   if (groupSize.value === 2) {
     toast({ description: "Gruppen kleiner 2, echt?" });
   } else {
