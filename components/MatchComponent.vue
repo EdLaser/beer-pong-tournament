@@ -42,20 +42,28 @@
     <h3 class="text-2xl">Match Vorschläge</h3>
     <div class="flex flex-col gap-3">
       <!-- Iterate Groups and teams per group, create Matchcard for teams in group. Defferenciate for Groups with teams count !== % 2 === 0  -->
-      <MatchCard
+      <div
+        class="flex flex-col gap-3"
         v-for="(match, index) in matchesPerGroup"
-        :nummer="index + 1"
-        :uuid="'group-' + index"
-        :team1="match.team1"
-        :team2="match.team2"
-        :winner="match.winner"
-        :is-draw="match.draw"
-        :missing-cups-team1="match.missingCupsTeam1"
-        :missing-cups-team2="match.missingCupsTeam2"
-      />
+      >
+        <h4 class="text-xl">{{ index }}</h4>
+        <div class="flex flex-col gap-3">
+          <MatchCard
+            v-for="(singleMatch, index) in match"
+            :nummer="index + 1"
+            :uuid="'group-' + index"
+            :team1="singleMatch.team1"
+            :team2="singleMatch.team2"
+            :winner="singleMatch.winner"
+            :is-draw="singleMatch.draw"
+            :missing-cups-team1="singleMatch.missingCupsTeam1"
+            :missing-cups-team2="singleMatch.missingCupsTeam2"
+          />
+        </div>
+      </div>
     </div>
   </div>
-  <div class="flex flex-col gap-3" v-if="matches.length > 0">
+  <div class="flex flex-col gap-3 mt-10" v-if="matches.length > 0">
     <h3 class="text-2xl">Alle Matches:</h3>
     <div class="flex flex-col gap-3">
       <MatchCard
@@ -67,7 +75,8 @@
         :team2="match.team2"
         :winner="match.winner"
         :is-draw="match.draw"
-        :missing-cups="match.missingCups"
+        :missing-cups-team1="match.missingCupsTeam1"
+        :missing-cups-team2="match.missingCupsTeam2"
       />
     </div>
   </div>
@@ -77,34 +86,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { Team } from "./TeamComponent.vue";
 import Button from "./ui/button/Button.vue";
 
 const store = useBeerStore();
-const { teams, matches, calculatedGroups } = storeToRefs(store);
-
-const createMatchesPerGroup = (group: { name: string; teams: Team[] }) => {
-  const teams = group.teams;
-  const matches = [];
-  for (let i = 0; i < teams.length; i++) {
-    for (let j = i + 1; j < teams.length; j++) {
-      matches.push({
-        team1: teams[i],
-        team2: teams[j],
-        winner: null,
-        draw: false,
-        missingCups: 0,
-      });
-    }
-  }
-  return matches;
-};
-const matchesPerGroup = ref();
-
-watch(calculatedGroups, (groups) => {
-  matchesPerGroup.value = groups.map(createMatchesPerGroup);
-  console.log(matchesPerGroup.value);
-});
+const { teams, matches, matchesPerGroup } = storeToRefs(store);
 
 const team1 = ref("null");
 const team2 = ref("null");

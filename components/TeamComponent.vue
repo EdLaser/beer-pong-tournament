@@ -86,7 +86,7 @@ const groupColors = computed(() => {
   const colorsCopy = [...colors];
   const result: Record<string, string> = {};
   for (const group of calculatedGroups.value) {
-    result[group.name] = colorsCopy.pop() || "bg-gray-700";
+    result[group.name] = colorsCopy.pop() ?? "bg-gray-700";
   }
   return result;
 });

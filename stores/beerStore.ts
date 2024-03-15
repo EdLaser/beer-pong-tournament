@@ -20,7 +20,25 @@ type MatchData = {
     players: any[];
   };
   draw: boolean;
-  missingCups: number;
+  missingCupsTeam1: number;
+  missingCupsTeam2: number;
+};
+
+const generateGroups = (teams: Array<Team>, groupSize: number) => {
+  const groups: Array<{
+    name: string;
+    teams: Array<Team>;
+  }> = [];
+
+  const amountOfGroups = Math.ceil(teams.length / groupSize);
+
+  for (let i = 0; i < amountOfGroups; i++) {
+    groups.push({
+      name: `Gruppe ${i + 1}`,
+      teams: teams.slice(i * groupSize, i * groupSize + groupSize),
+    });
+  }
+  return groups;
 };
 
 const checkForEmtpyInput = (values: Array<any>) => {
@@ -38,10 +56,40 @@ export const useBeerStore = defineStore("beerStore", () => {
   const players = ref([] as Array<{ name: string; uuid: string }>);
   const teams = ref([] as Array<Team>);
   const groupSize = ref(2);
+  const matchesPerGroup = ref({} as { [key: string]: Array<MatchData> });
 
   const calculatedGroups = computed(() => {
     const groups = generateGroups(teams.value, groupSize.value);
     return groups;
+  });
+
+  const createMatchesPerGroup = (group: { name: string; teams: Team[] }) => {
+    const teams = group.teams;
+    const matches = [];
+    for (let i = 0; i < teams.length; i++) {
+      for (let j = i + 1; j < teams.length; j++) {
+        matches.push({
+          uuid: "proposition",
+          team1: teams[i],
+          team2: teams[j],
+          draw: false,
+          missingCupsTeam1: 0,
+          missingCupsTeam2: 0,
+        });
+      }
+    }
+    console.log(matches);
+    return matches;
+  };
+
+  watch(calculatedGroups, (groups) => {
+    if (calculatedGroups.value.length === 0) return;
+    const groupMatchesMap = {} as { [key: string]: Array<MatchData> };
+    groups.map((group) => {
+      groupMatchesMap[group.name] = createMatchesPerGroup(group);
+    });
+    console.log(groupMatchesMap);
+    matchesPerGroup.value = groupMatchesMap;
   });
 
   const optimalGroupNumber = computed(() => {
@@ -63,23 +111,6 @@ export const useBeerStore = defineStore("beerStore", () => {
 
     return baseGroups;
   });
-
-  const generateGroups = (teams: Array<Team>, groupSize: number) => {
-    const groups: Array<{
-      name: string;
-      teams: Array<Team>;
-    }> = [];
-
-    const amountOfGroups = Math.ceil(teams.length / groupSize);
-
-    for (let i = 0; i < amountOfGroups; i++) {
-      groups.push({
-        name: `Gruppe ${i + 1}`,
-        teams: teams.slice(i * groupSize, i * groupSize + groupSize),
-      });
-    }
-    return groups;
-  };
 
   const fetchMatches = async () => {
     const data = await $fetch<Array<MatchData>>("/api/get-matches", {
@@ -178,6 +209,7 @@ export const useBeerStore = defineStore("beerStore", () => {
     groupSize,
     calculatedGroups,
     optimalGroupNumber,
+    matchesPerGroup,
     fetchMatches,
     fetchTeams,
     fetchPlayers,
